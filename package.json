@@ -8,5 +8,8 @@
   },
   "keywords": [],
   "author": "Thiago Kosudi",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "jsdoc": "^4.0.3"
+  }
 }
