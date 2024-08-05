@@ -1,6 +1,7 @@
 {
   "name": "middleware-client",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,6 +11,9 @@
   "author": "Thiago Kosudi",
   "license": "ISC",
   "devDependencies": {
+    "@eslint/js": "^9.8.0",
+    "eslint": "^9.8.0",
+    "globals": "^15.9.0",
     "jsdoc": "^4.0.3"
   }
 }
