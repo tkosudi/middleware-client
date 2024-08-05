@@ -1,5 +1,9 @@
 import axios from "axios"
 import { AbstractClient } from "../core/abstract-client"
+import { ApiError } from "../errors/api-error"
+import { UnauthorizedError } from "../errors/unauthorized-error"
+import { NoResponseError } from "../errors/no-response-error"
+import { RequestError } from "../errors/request-error"
 
 
 export class ApiClient extends AbstractClient {
@@ -24,16 +28,20 @@ export class ApiClient extends AbstractClient {
       })
 
       return response.data
-    } catch (error){
+    } catch (error) {
+
       if (error.response) {
-        throw new Error(`API error response status ${error.response.status} with this message: ${error.response.data.error}`)
+        if (error.status === 401) {
+          throw UnauthorizedError(error.response.message, error.response.status)
+        }
+        throw ApiError(error.response.message, error.response.status)
       }
 
       if (error.request) {
-        throw new Error("No response received from API")
+        throw NoResponseError()
       }
 
-      throw new Error(`Request Error: ${error.message}`)
+      throw new RequestError()
     }
   }
 }
