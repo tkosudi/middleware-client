@@ -5,7 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint . --ext .js",
+    "test": "jest"
   },
   "keywords": [],
   "author": "Thiago Kosudi",
@@ -13,11 +14,13 @@
   "devDependencies": {
     "@eslint/js": "^9.8.0",
     "eslint": "^9.8.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-jest": "^28.7.0",
     "globals": "^15.9.0",
+    "jest": "^29.7.0",
     "jsdoc": "^4.0.3"
   },
   "dependencies": {
-    "axios": "^1.7.3",
-    "jest": "^29.7.0"
+    "axios": "^1.7.3"
   }
 }
