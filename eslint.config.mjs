@@ -18,6 +18,7 @@ export default [
       jest: eslintPluginJest,
     },
     rules: {
+      quotes: ['error', 'single'],
       ...eslintConfigStandard.rules,
     },
     env: {
