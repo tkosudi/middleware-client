@@ -63,6 +63,31 @@ describe('ApiClient', () => {
     await expect(client.call(endpoint, method, data)).rejects.toThrow(ApiError)
   })
 
+  test('Should return 404 if API returns not found error', async () => {
+    axios.mockRejectedValue({
+      response: {
+        status: 404,
+        data: {
+          error: 'Not Found'
+        }
+      }
+    });
+
+    await expect(client.call(endpoint, method, data)).rejects.toThrow(ApiError);
+  })
+
 })
 
 
+
+
+// test('Should handle API errors', async () => {
+//   axios.mockRejectedValue({
+//     response: {
+//       status: 400,
+//       data: { error: 'Bad Request' }
+//     }
+//   })
+
+//   await expect(client.call(endpoint, method, data)).rejects.toThrow(ApiError)
+// })
