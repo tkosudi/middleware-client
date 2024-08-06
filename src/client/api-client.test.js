@@ -3,6 +3,7 @@ import { ApiClient } from './api-client'
 import * as axios from 'axios'
 import { UnauthorizedError } from '../errors/unauthorized-error'
 import { ApiError } from '../errors/api-error'
+import { NoResponseError } from '../errors/no-response-error'
 
 jest.mock('axios')
 
@@ -71,9 +72,9 @@ describe('ApiClient', () => {
           error: 'Not Found'
         }
       }
-    });
+    })
 
-    await expect(client.call(endpoint, method, data)).rejects.toThrow(ApiError);
+    await expect(client.call(endpoint, method, data)).rejects.toThrow(ApiError)
   })
 
   test('Should return 500 if API returns internal server error', async () => {
@@ -84,9 +85,21 @@ describe('ApiClient', () => {
           error: 'Internal Server Error'
         }
       }
-    });
+    })
 
-    await expect(client.call(endpoint, method, data)).rejects.toThrow(ApiError);
+    await expect(client.call(endpoint, method, data)).rejects.toThrow(ApiError)
   })
 
+  test('Should handle API error with unknown status', async () => {
+    axios.mockRejectedValue({
+      response: {
+        status: 418,
+        data: {
+          error: 'Unknown error'
+        }
+      }
+    })
+
+    await expect(client.call(endpoint, method, data)).rejects.toThrow(ApiError)
+  })
 })
