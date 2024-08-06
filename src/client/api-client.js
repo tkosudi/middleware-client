@@ -26,19 +26,28 @@ export class ApiClient extends AbstractClient {
 
       return response.data
     } catch (error) {
-      if (error.response) {
-        if (error.response.status === 401) {
-          throw new UnauthorizedError(error.response.data.error)
-        }
+      this.handleErrors(error)
+    }
+  }
 
-        throw new ApiError(error.response.data.error, error.response.status)
+  handleErrors(error) {
+    if (error.response) {
+      switch (error.response.status) {
+        case 401:
+          throw new UnauthorizedError('User or password incorrect')
+        case 403:
+          throw new ApiError('Accesss forbidden', 403)
+        case 404:
+          throw new ApiError('Not found', 404)
+        case 500:
+          throw new ApiError('Internal server error', 500)
+        default:
+          throw new ApiError(error.response.data.error || `API error with status code: ${error.response.status}`)
       }
-
-      if (error.request) {
-        throw new NoResponseError()
-      }
-
-      throw new RequestError(error.message)
+    } else if (error.request) {
+      throw new NoResponseError('No response received from API')
+    } else {
+      throw new RequestError(`Request error: ${error.message}`)
     }
   }
 }
