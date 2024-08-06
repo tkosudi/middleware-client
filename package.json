@@ -7,7 +7,9 @@
   "scripts": {
     "lint": "eslint . --ext .js",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
-    "test:unit": "npm test -- --watch "
+    "test:ci": "npm test -- --coverage",
+    "test:integration": "npm test -- --config jest.integration.config.js",
+    "test:unit": "npm test -- --watch --config jest.unit.config.js"
   },
   "keywords": [],
   "author": "Thiago Kosudi",
