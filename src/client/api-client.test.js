@@ -1,6 +1,7 @@
 import { jest } from '@jest/globals'
 import { ApiClient } from './api-client'
 import * as axios from 'axios'
+import { UnauthorizedError } from '../errors/unauthorized-error'
 
 jest.mock('axios')
 
@@ -33,6 +34,19 @@ describe('ApiClient', () => {
         'Authorization': `Bearer ${credentials.token}`
       }
     });
+  });
+
+  test('Should return 401 if API returns unauthorized error', async () => {
+    axios.mockRejectedValue({
+      response: {
+        status: 401,
+        data: {
+          error: 'Unauthorized'
+        }
+      }
+    });
+
+    await expect(client.call(endpoint, method, data)).rejects.toThrow(UnauthorizedError);
   });
 });
 
