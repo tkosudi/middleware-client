@@ -76,18 +76,17 @@ describe('ApiClient', () => {
     await expect(client.call(endpoint, method, data)).rejects.toThrow(ApiError);
   })
 
+  test('Should return 500 if API returns internal server error', async () => {
+    axios.mockRejectedValue({
+      response: {
+        status: 500,
+        data: {
+          error: 'Internal Server Error'
+        }
+      }
+    });
+
+    await expect(client.call(endpoint, method, data)).rejects.toThrow(ApiError);
+  })
+
 })
-
-
-
-
-// test('Should handle API errors', async () => {
-//   axios.mockRejectedValue({
-//     response: {
-//       status: 400,
-//       data: { error: 'Bad Request' }
-//     }
-//   })
-
-//   await expect(client.call(endpoint, method, data)).rejects.toThrow(ApiError)
-// })
