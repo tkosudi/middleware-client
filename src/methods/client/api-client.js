@@ -30,6 +30,14 @@ export class ApiClient extends AbstractClient {
     }
   }
 
+  /**
+   * Armazena o token de autenticação
+   * @param {string} token
+   */
+  setToken(token) {
+    this.credentials.token = token;
+  }
+
   handleErrors(error) {
     if (error.response) {
       switch (error.response.status) {
