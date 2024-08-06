@@ -1,9 +1,9 @@
 import axios from 'axios'
-import { AbstractClient } from '../core/abstract-client.js'
-import { ApiError } from '../errors/api-error.js'
-import { UnauthorizedError } from '../errors/unauthorized-error.js'
-import { NoResponseError } from '../errors/no-response-error.js'
-import { RequestError } from '../errors/request-error.js'
+import { AbstractClient } from '../../core/abstract-client.js'
+import { ApiError } from '../../errors/api-error.js'
+import { UnauthorizedError } from '../../errors/unauthorized-error.js'
+import { NoResponseError } from '../../errors/no-response-error.js'
+import { RequestError } from '../../errors/request-error.js'
 
 export class ApiClient extends AbstractClient {
   /**

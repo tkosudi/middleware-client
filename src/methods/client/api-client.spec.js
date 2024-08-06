@@ -1,10 +1,10 @@
 import { jest } from '@jest/globals'
 import { ApiClient } from './api-client'
 import * as axios from 'axios'
-import { UnauthorizedError } from '../errors/unauthorized-error'
-import { ApiError } from '../errors/api-error'
-import { NoResponseError } from '../errors/no-response-error'
-import { RequestError } from '../errors/request-error'
+import { UnauthorizedError } from '../../errors/unauthorized-error'
+import { ApiError } from '../../errors/api-error'
+import { NoResponseError } from '../../errors/no-response-error'
+import { RequestError } from '../../errors/request-error'
 
 jest.mock('axios')
 
