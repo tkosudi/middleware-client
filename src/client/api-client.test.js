@@ -102,4 +102,12 @@ describe('ApiClient', () => {
 
     await expect(client.call(endpoint, method, data)).rejects.toThrow(ApiError)
   })
+
+  test('Should handle no response error', async () => {
+    axios.mockRejectedValue({
+      request: {}
+    })
+
+    await expect(client.call(endpoint, method, data)).rejects.toThrow(NoResponseError)
+  })
 })
