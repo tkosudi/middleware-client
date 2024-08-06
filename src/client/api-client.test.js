@@ -4,6 +4,7 @@ import * as axios from 'axios'
 import { UnauthorizedError } from '../errors/unauthorized-error'
 import { ApiError } from '../errors/api-error'
 import { NoResponseError } from '../errors/no-response-error'
+import { RequestError } from '../errors/request-error'
 
 jest.mock('axios')
 
@@ -109,5 +110,13 @@ describe('ApiClient', () => {
     })
 
     await expect(client.call(endpoint, method, data)).rejects.toThrow(NoResponseError)
+  })
+
+
+
+  test('Should handle request error', async () => {
+    axios.mockRejectedValue(new Error('Network Error'))
+
+    await expect(client.call(endpoint, method, data)).rejects.toThrow(RequestError)
   })
 })
