@@ -1,6 +1,7 @@
-import { ApiError } from "../errors/api-error"
-import { UnauthorizedError } from "../errors/unauthorized-error"
+import { ApiError } from "../../errors/api-error"
+import { UnauthorizedError } from "../../errors/unauthorized-error"
 import { ApiClient } from "./api-client"
+
 
 const credentials = { token: '' }
 const client = new ApiClient(credentials)
