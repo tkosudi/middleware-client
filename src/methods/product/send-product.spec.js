@@ -1,6 +1,6 @@
 import { SendProduct } from "../product/send-product"
 import { ApiClient } from "../client/api-client"
-import * as axios from "axios"
+import axios from "axios"
 
 jest.mock('axios')
 
@@ -10,32 +10,59 @@ describe('SendProduct', () => {
   let sendProduct
 
   beforeEach(() => {
-    client = new ApiClient({})
+    client = new ApiClient({ token: 'any_token' })
     sendProduct = new SendProduct(client)
+
+    client.call = jest.fn().mockResolvedValue({
+      status: 201,
+      data: { success: true }
+    })
   })
 
-  test('Should successfully send a product', async () => {
-    const product = {
+  test('Should call SendProduct with correct values', async () => {
+    const productData = {
+      client_id: '66a157abe244d77781ba32cc',
       sku: 'd701748f0999',
       name: 'Produto teste',
+      reference_id: 158641,
+      ean: 484546544489,
+      weight: 0.1,
+      status: 'active',
       description: 'Produto teste com finalidade de definição de schema.',
+      short_description: 'Produto teste com finalidade de definição de schema.',
+      height: 0.2,
+      width: 0.3,
+      length: 0.1,
       additional_attributes: [
-        { key: 'color', value: 'preto' }
+        {
+          key: 'inmetro_code',
+          label: 'Código do Inmetro',
+          value: '6750/2014'
+        },
+        {
+          key: 'color',
+          label: 'Cor',
+          value: 'preto'
+        }
       ],
       image_list: [
         {
-          url: 'https://example.com/product.jpg',
+          url: 'https://www.teste.com.br/pasta/iphone.jpg',
           position: 1,
+          label: 'Teste',
           main_image: true
         }
       ]
-    };
+    }
 
-    axios.mockResolvedValue({
-      data: { success: true }
-    });
+    const response = await sendProduct.execute(productData)
 
-    const response = await sendProduct.execute(product);
-    expect(response.success).toBe(true);
+    expect(response).toEqual({ success: true })
+    expect(client.call).toHaveBeenCalledWith(
+      'https://357vtrxigb.execute-api.us-east-1.amazonaws.com/prd/v1/product',
+      'POST',
+      productData
+    )
   })
+
 })
