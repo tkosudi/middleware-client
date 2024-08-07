@@ -1,4 +1,5 @@
 import { AbstractMethod } from '../../core/abstract-method'
+import { RequestError } from '../../errors/request-error'
 
 export class SendProduct extends AbstractMethod {
   /**
@@ -15,10 +16,25 @@ export class SendProduct extends AbstractMethod {
 
     for (const field of requiredFields) {
       if (!product[field]) {
-        throw new Error(`Missing required field: ${field}`);
+        throw new RequestError(`Missing required field: ${field}`)
       }
     }
 
-    return await this.client.call(endpoint, method, product);
+    try {
+      const response = await this.client.call(endpoint, method, product)
+
+      if (response.status === 201) {
+        return response.data
+      }
+    } catch (error) {
+      if (error.response) {
+        if (error.response.status === 409) {
+          throw new ApiError('Entity already exists', 409)
+        } else if (error.response.status === 422) {
+          throw new ApiError('Invalid input: ' + error.response.data.message, 422)
+        }
+      }
+      throw error
+    }
   }
 }
