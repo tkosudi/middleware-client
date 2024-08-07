@@ -2,6 +2,7 @@ import { SendProduct } from "../product/send-product"
 import { ApiClient } from "../client/api-client"
 import axios from "axios"
 import { RequestError } from "../../errors/request-error"
+import { ApiError } from "../../errors/api-error"
 
 jest.mock('axios')
 
@@ -69,7 +70,21 @@ describe('SendProduct', () => {
   test('Should throw error if required fields are missing', async () => {
     const productData = makeFakeProduct()
     delete productData.sku
-    await expect(sendProduct.execute(productData)).rejects.toThrow(RequestError);
-    await expect(sendProduct.execute(productData)).rejects.toThrow('Missing required field: sku');
+    await expect(sendProduct.execute(productData)).rejects.toThrow(RequestError)
+    await expect(sendProduct.execute(productData)).rejects.toThrow('Missing required field: sku')
+  })
+
+  test('Should throw ApiError if entity already exists (status 409)', async () => {
+    client.call.mockRejectedValue({
+      response: {
+        status: 409,
+        data: { message: 'Entity already exists' }
+      }
+    })
+
+    const productData = makeFakeProduct()
+
+    await expect(sendProduct.execute(productData)).rejects.toThrow(ApiError)
+    await expect(sendProduct.execute(productData)).rejects.toThrow('Entity already exists')
   })
 })
