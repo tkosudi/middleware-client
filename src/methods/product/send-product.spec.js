@@ -87,4 +87,18 @@ describe('SendProduct', () => {
     await expect(sendProduct.execute(productData)).rejects.toThrow(ApiError)
     await expect(sendProduct.execute(productData)).rejects.toThrow('Entity already exists')
   })
+
+  test('Should throw ApiError if input is invalid (status 422)', async () => {
+    client.call.mockRejectedValue({
+      response: {
+        status: 422,
+        data: { message: 'Invalid input' }
+      }
+    })
+
+    const productData = makeFakeProduct()
+
+    await expect(sendProduct.execute(productData)).rejects.toThrow(ApiError)
+    await expect(sendProduct.execute(productData)).rejects.toThrow('Invalid input: Invalid input')
+  })
 })
