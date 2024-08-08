@@ -1,0 +1,156 @@
+[
+  [
+    "define",
+    {
+      "var": "credentials",
+      "value": {
+        "email": "livecode@integra.do",
+        "password": "issoehumteste"
+      }
+    }
+  ],
+  [
+    "call",
+    {
+      "service": "middleware:client",
+      "method": "Login",
+      "parameters": [
+        "$credentials"
+      ]
+    }
+  ],
+  [
+    "define",
+    {
+      "var": "products",
+      "value": [
+        {
+          "client_id": "66a157abe244d77781ba32cc",
+          "sku": "d701748f0991",
+          "name": "Produto 1",
+          "description": "Descrição do Produto 1",
+          "reference_id": 158641,
+          "ean": 484546544489,
+          "weight": 0.1,
+          "status": "active",
+          "short_description": "Produto teste com finalidade de definição de schema.",
+          "height": 0.2,
+          "width": 0.3,
+          "length": 0.1,
+          "additional_attributes": [
+            {
+              "key": "inmetro_code",
+              "label": "Código do Inmetro",
+              "value": "6750/2014"
+            },
+            {
+              "key": "color",
+              "label": "Cor",
+              "value": "preto"
+            }
+          ],
+          "image_list": [
+            {
+              "url": "https://www.teste.com.br/pasta/iphone.jpg",
+              "position": 1,
+              "label": "Teste",
+              "main_image": true
+            }
+          ]
+        },
+        {
+          "client_id": "66a157abe244d77781ba32cc",
+          "sku": "d701748f1992",
+          "name": "Produto 2",
+          "description": "Descrição do Produto 2",
+          "reference_id": 158642,
+          "ean": 484546544490,
+          "weight": 0.2,
+          "status": "active",
+          "short_description": "Produto teste com finalidade de definição de schema.",
+          "height": 0.3,
+          "width": 0.4,
+          "length": 0.2,
+          "additional_attributes": [
+            {
+              "key": "inmetro_code",
+              "label": "Código do Inmetro",
+              "value": "6750/2015"
+            },
+            {
+              "key": "color",
+              "label": "Cor",
+              "value": "azul"
+            }
+          ],
+          "image_list": [
+            {
+              "url": "https://www.teste.com.br/pasta/iphone2.jpg",
+              "position": 1,
+              "label": "Teste 2",
+              "main_image": true
+            }
+          ]
+        },
+        {
+          "client_id": "66a157abe244d77781ba32cc",
+          "sku": "d701748f2993",
+          "name": "Produto 3",
+          "description": "Descrição do Produto 3",
+          "reference_id": 158643,
+          "ean": 484546544491,
+          "weight": 0.3,
+          "status": "active",
+          "short_description": "Produto teste com finalidade de definição de schema.",
+          "height": 0.4,
+          "width": 0.5,
+          "length": 0.3,
+          "additional_attributes": [
+            {
+              "key": "inmetro_code",
+              "label": "Código do Inmetro",
+              "value": "6750/2016"
+            },
+            {
+              "key": "color",
+              "label": "Cor",
+              "value": "vermelho"
+            }
+          ],
+          "image_list": [
+            {
+              "url": "https://www.teste.com.br/pasta/iphone3.jpg",
+              "position": 1,
+              "label": "Teste 3",
+              "main_image": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  [
+    "each",
+    {
+      "generator": [
+        "variable",
+        {
+          "var": "products"
+        }
+      ],
+      "item_var": "product",
+      "routine": [
+        [
+          "call",
+          {
+            "service": "middleware:client",
+            "method": "SendProduct",
+            "parameters": [
+              "$product"
+            ]
+          }
+        ]
+      ]
+    }
+  ]
+]
