@@ -1,8 +1,10 @@
 import { SendProduct } from "../product/send-product"
 import { ApiClient } from "../client/api-client"
-import axios from "axios"
 import { RequestError } from "../../errors/request-error"
 import { ApiError } from "../../errors/api-error"
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 jest.mock('axios')
 
