@@ -1,4 +1,4 @@
-import { AbstractMethod } from "../../core/abstract-method";
+import { AbstractMethod } from "../../core/abstract-method.js"
 
 export class Login extends AbstractMethod {
   /**
