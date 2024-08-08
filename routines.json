@@ -4,8 +4,8 @@
     {
       "var": "credentials",
       "value": {
-        "email": "livecode@integra.do",
-        "password": "issoehumteste"
+        "email": "${USER_EMAIL}",
+        "password": "${USER_PASSWORD}"
       }
     }
   ],
@@ -26,7 +26,7 @@
       "value": [
         {
           "client_id": "66a157abe244d77781ba32cc",
-          "sku": "d701748f0991",
+          "sku": "d701748f0997",
           "name": "Produto 1",
           "description": "Descrição do Produto 1",
           "reference_id": 158641,
@@ -60,7 +60,7 @@
         },
         {
           "client_id": "66a157abe244d77781ba32cc",
-          "sku": "d701748f1992",
+          "sku": "d701748f1998",
           "name": "Produto 2",
           "description": "Descrição do Produto 2",
           "reference_id": 158642,
@@ -94,7 +94,7 @@
         },
         {
           "client_id": "66a157abe244d77781ba32cc",
-          "sku": "d701748f2993",
+          "sku": "d701748f2999",
           "name": "Produto 3",
           "description": "Descrição do Produto 3",
           "reference_id": 158643,

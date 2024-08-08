@@ -20,12 +20,8 @@ describe('Login Integration', () => {
       data: { token: 'fake-jwt-token', version: '1.0' }
     })
 
-    console.log('Credentials:', credentials)
-
     try {
       const response = await login.execute(credentials)
-
-      console.log('Response:', response)
 
       expect(response).toHaveProperty('token')
       expect(typeof response.token).toBe('string')

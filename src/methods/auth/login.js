@@ -8,7 +8,7 @@ export class Login extends AbstractMethod {
    */
 
   async execute(credentials) {
-    const endpoint = 'https://357vtrxigb.execute-api.us-east-1.amazonaws.com/prd/v1/auth/login'
+    const endpoint = `${process.env.API_URL}/auth/login`
     const method = 'POST'
 
     return await this.client.call(endpoint, method, credentials)

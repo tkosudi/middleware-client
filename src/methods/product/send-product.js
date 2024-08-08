@@ -9,7 +9,7 @@ export class SendProduct extends AbstractMethod {
    * @returns {Object}
    */
   async execute(product) {
-    const endpoint = 'https://357vtrxigb.execute-api.us-east-1.amazonaws.com/prd/v1/product'
+    const endpoint = `${process.env.API_URL}/product`
     const method = 'POST'
 
     const requiredFields = ['sku', 'name', 'description']
