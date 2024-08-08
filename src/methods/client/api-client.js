@@ -35,7 +35,7 @@ export class ApiClient extends AbstractClient {
    * @param {string} token
    */
   setToken(token) {
-    this.credentials.token = token;
+    this.credentials.token = token
   }
 
   handleErrors(error) {

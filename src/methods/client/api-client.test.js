@@ -30,7 +30,7 @@ describe('ApiClient Integration Test - Login', () => {
   })
 
   test('Should handle API errors', async () => {
-    const invalidEndpoint = 'https://357vtrxigb.execute-api.us-east-1.amazonaws.com/prd/v1/auth/invalid';
+    const invalidEndpoint = 'https://357vtrxigb.execute-api.us-east-1.amazonaws.com/prd/v1/auth/invalid'
     await expect(client.call(invalidEndpoint, method, data)).rejects.toThrow(ApiError)
-  });
+  })
 })

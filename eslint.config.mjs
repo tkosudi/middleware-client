@@ -1,7 +1,7 @@
-import globals from 'globals';
-import pluginJs from '@eslint/js';
-import eslintPluginJest from 'eslint-plugin-jest';
-import eslintConfigStandard from 'eslint-config-standard';
+import globals from 'globals'
+import pluginJs from '@eslint/js'
+import eslintPluginJest from 'eslint-plugin-jest'
+import eslintConfigStandard from 'eslint-config-standard'
 
 export default [
   {
@@ -30,4 +30,4 @@ export default [
     },
   },
   pluginJs.configs.recommended,
-];
+]
